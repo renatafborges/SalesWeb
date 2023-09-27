@@ -1,22 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWeb.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SalesWeb.Controllers
 {
     public class SalesRecordsController : Controller
     {
-        // GET
+        private readonly SalesRecordService _salesRecordService;
+        
+        public SalesRecordsController(SalesRecordService salesRecordService)
+        {
+            _salesRecordService = salesRecordService;
+        }
+        
         public IActionResult Index()
         {
             return View();
         }
         
-        // GET
-        public IActionResult SimpleSearch()
+        public async Task<IActionResult> SimpleSearchAsync(DateTime? minDate, DateTime? maxDate)
         {
-            return View();
+            if (!minDate.HasValue)
+            {
+                minDate = DateTime.Now;
+            }
+            
+            if (!maxDate.HasValue)
+            {
+                maxDate = new DateTime(DateTime.Now.Year, 1, 1);
+            }
+
+            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
+            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
+            
+            var result = await _salesRecordService.FindByDateAsync(minDate, maxDate);
+            return View(result);
         }
         
-        // GET
         public IActionResult GroupingSearch()
         {
             return View();
