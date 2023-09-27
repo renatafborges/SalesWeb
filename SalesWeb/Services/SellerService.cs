@@ -3,7 +3,6 @@ using SalesWeb.Data;
 using SalesWeb.Models;
 using SalesWeb.Services.Exceptions;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SalesWeb.Services
@@ -29,9 +28,16 @@ namespace SalesWeb.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Cannot delete seller because he/she has sales");
+            }
         }
 
         public async Task InsertAsync(Seller obj)
@@ -43,10 +49,9 @@ namespace SalesWeb.Services
         public async Task UpdateAsync(Seller obj)
         {
             bool hasAny = await _context.Seller.AnyAsync(x => x.Id == obj.Id);
-            
+
             if (!hasAny)
             {
-              
                 throw new NotFoundExcepction("Id not founf");
             }
 
