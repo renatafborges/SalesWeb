@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesWeb.Domain.Services.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace SalesWeb.Models
             Id = id;
             Name = name;
             Email = email;
-            BirthDate = birthDate;
+            BirthDate = birthDate < DateTime.Today ? birthDate : throw new BirthDateCannotBeInTheFutureException();
             BaseSalary = baseSalary;
             Department = department;
         }

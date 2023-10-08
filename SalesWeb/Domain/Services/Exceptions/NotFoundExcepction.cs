@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SalesWeb.Services.Exceptions
+namespace SalesWeb.Domain.Services.Exceptions
 {
     public class NotFoundExcepction : ApplicationException
     {
