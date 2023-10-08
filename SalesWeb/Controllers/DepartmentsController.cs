@@ -1,9 +1,9 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
 using SalesWeb.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SalesWeb.Controllers
 {

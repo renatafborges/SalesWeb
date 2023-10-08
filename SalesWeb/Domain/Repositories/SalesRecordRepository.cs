@@ -1,22 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
+using SalesWeb.Domain.Interfaces.Repositories;
 using SalesWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Services
+namespace SalesWeb.Domain.Repositories
 {
-    public class SalesRecordService
+    public class SalesRecordRepository : ISalesRecordRepository
     {
         private readonly SalesWebContext _context;
 
-        public SalesRecordService(SalesWebContext context)
+        public SalesRecordRepository(SalesWebContext context)
         {
             _context = context;
         }
-
+        
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
         {
             var result = from obj in _context.SalesRecord select obj;

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWeb.Domain.Interfaces.Services;
+using SalesWeb.Domain.Services.Exceptions;
 using SalesWeb.Models;
+using SalesWeb.Models.InputModel;
 using SalesWeb.Models.ViewsModels;
-using SalesWeb.Services;
-using SalesWeb.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,10 +13,10 @@ namespace SalesWeb.Controllers
 {
     public class SellersController : Controller
     {
-        private readonly SellerService _sellerService;
-        private readonly DepartmentService _departmentService;
+        private readonly ISellerService _sellerService;
+        private readonly IDepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService, DepartmentService departmentService)
+        public SellersController(ISellerService sellerService, IDepartmentService departmentService)
         {
             _sellerService = sellerService;
             _departmentService = departmentService;
@@ -36,12 +37,12 @@ namespace SalesWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Seller seller)
+        public async Task<IActionResult> Create(AddSellerInputModel seller)
         {
             if (!ModelState.IsValid)
             {
                 var departments = await _departmentService.FindAllAsync();
-                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                var viewModel = new SellerFormViewModel { Seller = new Seller(), Departments = departments };
                 return View(viewModel);
             }
 

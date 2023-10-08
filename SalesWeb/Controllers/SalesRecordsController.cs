@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesWeb.Services;
+using SalesWeb.Domain.Interfaces.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -7,9 +7,9 @@ namespace SalesWeb.Controllers
 {
     public class SalesRecordsController : Controller
     {
-        private readonly SalesRecordService _salesRecordService;
+        private readonly ISalesRecordService _salesRecordService;
         
-        public SalesRecordsController(SalesRecordService salesRecordService)
+        public SalesRecordsController(ISalesRecordService salesRecordService)
         {
             _salesRecordService = salesRecordService;
         }

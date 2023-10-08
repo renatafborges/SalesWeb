@@ -7,7 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
-using SalesWeb.Services;
+using SalesWeb.Domain.Interfaces.Repositories;
+using SalesWeb.Domain.Interfaces.Services;
+using SalesWeb.Domain.Repositories;
+using SalesWeb.Domain.Services;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -36,9 +39,12 @@ namespace SalesWeb
                     builder.MigrationsAssembly("SalesWeb")));
 
             services.AddScoped<SeedingService>();
-            services.AddScoped<SellerService>();
-            services.AddScoped<DepartmentService>();
-            services.AddScoped<SalesRecordService>();
+            services.AddScoped<ISellerService, SellerService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<ISalesRecordService, SalesRecordService>();
+            services.AddScoped<ISellerRepository, SellerRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ISalesRecordRepository, SalesRecordRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

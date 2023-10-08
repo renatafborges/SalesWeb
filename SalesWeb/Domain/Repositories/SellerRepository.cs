@@ -1,17 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
+using SalesWeb.Domain.Interfaces.Repositories;
+using SalesWeb.Domain.Services.Exceptions;
 using SalesWeb.Models;
-using SalesWeb.Services.Exceptions;
+using SalesWeb.Models.InputModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Services
+namespace SalesWeb.Domain.Repositories
 {
-    public class SellerService
+    public class SellerRepository : ISellerRepository
     {
         private readonly SalesWebContext _context;
 
-        public SellerService(SalesWebContext context)
+        public SellerRepository(SalesWebContext context)
         {
             _context = context;
         }
@@ -40,10 +42,22 @@ namespace SalesWeb.Services
             }
         }
 
-        public async Task InsertAsync(Seller obj)
+        public async Task<Seller> InsertAsync(AddSellerInputModel obj)
         {
-            _context.Add(obj);
+            var seller = new Seller
+            {
+                Name = obj.Name,
+                Email = obj.Email,
+                BirthDate = obj.BirthDate,
+                BaseSalary = obj.BaseSalary,
+                Department = obj.Department,
+                DepartmentId = obj.DepartmentId,
+                Sales = obj.Sales
+            };
+
+            _context.Add(seller);
             await _context.SaveChangesAsync();
+            return seller;
         }
 
         public async Task UpdateAsync(Seller obj)
@@ -52,7 +66,7 @@ namespace SalesWeb.Services
 
             if (!hasAny)
             {
-                throw new NotFoundExcepction("Id not founf");
+                throw new NotFoundExcepction("Id not found");
             }
 
             try
