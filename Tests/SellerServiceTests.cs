@@ -1,9 +1,10 @@
 ﻿using Moq;
-using SalesWeb.Domain.Interfaces.Repositories;
+using SalesWeb.Domain.Interfaces;
+using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Models.Enums;
+using SalesWeb.Domain.Models.InputModel;
 using SalesWeb.Domain.Services;
 using SalesWeb.Domain.Services.Exceptions;
-using SalesWeb.Models;
-using SalesWeb.Models.InputModel;
 using Shouldly;
 using System;
 using Xunit;
@@ -22,7 +23,7 @@ namespace Tests
                 Name = "Eletronics"
             };
 
-            const string birthDateString = "5/8/1900 12:00:00 AM";
+            const string birthDateString = "08/05/1980 12:00:00 AM";
             
             var birthDate = DateTime.Parse(birthDateString, System.Globalization.CultureInfo.InvariantCulture);
 
@@ -74,7 +75,7 @@ namespace Tests
                 Name = "Eletronics"
             };
 
-            const string birthDateStringInFuture = "5/8/2050 12:00:00 AM";
+            const string birthDateStringInFuture = "08/05/2050 12:00:00 AM";
             
             var birthDate = DateTime.Parse(birthDateStringInFuture, System.Globalization.CultureInfo.InvariantCulture);
 
@@ -95,7 +96,7 @@ namespace Tests
         public async void SellerIdWithNoSales_RemoveIsCalled_SellerIsRemoved()
         {
             //Arrange
-            const string birthDateString = "5/8/1900 12:00:00 AM";
+            const string birthDateString = "08/05/1980 12:00:00 AM";
 
             var birthDate = DateTime.Parse(birthDateString, System.Globalization.CultureInfo.InvariantCulture);
 
@@ -115,6 +116,37 @@ namespace Tests
             //Assert
             sellerRepositoryMock.Verify(sr => sr.RemoveAsync(It.IsAny<int>()), Times.Once());
             
+        }
+        
+        [Fact]
+        public async void SellerIdWithSales_RemoveIsCalled_SellerIsNotRemoved()
+        {
+            //Arrange
+            const string birthDateString = "08/05/1980 12:00:00 AM";
+
+            var birthDate = DateTime.Parse(birthDateString, System.Globalization.CultureInfo.InvariantCulture);
+
+            var department = new Department(1, "Eletronics");
+
+            var seller = new Seller(1, "Renata", "test@test.com", birthDate, 5000, department);
+
+            var salesRecord = new SalesRecord(1, DateTime.Today, 1500, SaleStatus.Billed, seller);
+
+            var sellerRepositoryMock = new Mock<ISellerRepository>();
+            
+            seller.AddSales(salesRecord);
+
+            sellerRepositoryMock.Setup(sr => sr.RemoveAsync(seller.Id));
+            
+            var sellerService = new SellerService(sellerRepositoryMock.Object);
+
+            //Act
+            await sellerService.RemoveAsync(seller.Id);
+
+            var exception = await Assert.ThrowsAsync<IntegrityException>(() => sellerService.RemoveAsync(seller.Id));
+            
+            //Assert
+            Assert.Equal("Cannot delete seller because he/she has sales", exception.Message);
         }
     }
 }

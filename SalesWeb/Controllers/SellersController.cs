@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesWeb.Domain.Interfaces.Services;
+using SalesWeb.Domain.Interfaces;
+using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Models.InputModel;
+using SalesWeb.Domain.Models.ViewsModels;
 using SalesWeb.Domain.Services.Exceptions;
-using SalesWeb.Models;
-using SalesWeb.Models.InputModel;
-using SalesWeb.Models.ViewsModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

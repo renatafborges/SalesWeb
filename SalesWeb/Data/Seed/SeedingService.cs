@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
-using SalesWeb.Models;
-using SalesWeb.Models.Enums;
+using SalesWeb.Data.Context;
+using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Models.Enums;
 using System;
 
-namespace SalesWeb.Data
+namespace SalesWeb.Data.Seed
 {
     public class SeedingService
     {

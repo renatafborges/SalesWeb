@@ -1,8 +1,8 @@
-﻿using SalesWeb.Models;
+﻿using SalesWeb.Domain.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Domain.Interfaces.Services
+namespace SalesWeb.Domain.Interfaces
 {
     public interface IDepartmentService
     {

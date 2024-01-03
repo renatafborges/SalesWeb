@@ -1,8 +1,8 @@
-﻿using SalesWeb.Models.Enums;
+﻿using SalesWeb.Domain.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SalesWeb.Models
+namespace SalesWeb.Domain.Models.Entities
 {
     public class SalesRecord
     {

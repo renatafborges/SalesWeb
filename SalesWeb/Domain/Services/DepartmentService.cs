@@ -1,6 +1,5 @@
-﻿using SalesWeb.Domain.Interfaces.Repositories;
-using SalesWeb.Domain.Interfaces.Services;
-using SalesWeb.Models;
+﻿using SalesWeb.Domain.Interfaces;
+using SalesWeb.Domain.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

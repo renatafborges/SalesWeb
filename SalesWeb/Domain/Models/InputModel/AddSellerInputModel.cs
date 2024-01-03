@@ -1,9 +1,10 @@
-﻿using SalesWeb.Domain.Services.Exceptions;
+﻿using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SalesWeb.Models.InputModel
+namespace SalesWeb.Domain.Models.InputModel
 {
     public class AddSellerInputModel
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace SalesWeb.Models
+namespace SalesWeb.Domain.Models.Entities
 {
     public class Seller
     {

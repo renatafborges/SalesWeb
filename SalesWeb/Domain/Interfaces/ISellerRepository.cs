@@ -1,11 +1,11 @@
-﻿using SalesWeb.Models;
-using SalesWeb.Models.InputModel;
+﻿using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Models.InputModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Domain.Interfaces.Services
+namespace SalesWeb.Domain.Interfaces
 {
-    public interface ISellerService
+    public interface ISellerRepository
     {
         Task<List<Seller>> FindAllAsync();
         Task<Seller> FindByIdAsync(int id);

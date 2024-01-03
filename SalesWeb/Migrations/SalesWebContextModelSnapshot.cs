@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesWeb.Data;
+using SalesWeb.Data.Context;
 
 namespace SalesWeb.Migrations
 {

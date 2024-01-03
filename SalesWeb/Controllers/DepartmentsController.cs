@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SalesWeb.Data;
-using SalesWeb.Models;
+using SalesWeb.Data.Context;
+using SalesWeb.Domain.Models.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 

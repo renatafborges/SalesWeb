@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesWeb.Domain.Interfaces.Services;
+using SalesWeb.Domain.Interfaces;
 using System;
 using System.Threading.Tasks;
 

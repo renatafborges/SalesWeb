@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using SalesWeb.Domain.Models.Entities;
+using System.Collections.Generic;
 
-namespace SalesWeb.Models.ViewsModels
+namespace SalesWeb.Domain.Models.ViewsModels
 {
     public class SellerFormViewModel
     {

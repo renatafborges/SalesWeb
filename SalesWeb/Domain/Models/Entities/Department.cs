@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace SalesWeb.Models
+namespace SalesWeb.Domain.Models.Entities
 {
     public class Department
     {

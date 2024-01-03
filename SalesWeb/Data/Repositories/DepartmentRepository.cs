@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesWeb.Data;
-using SalesWeb.Domain.Interfaces.Repositories;
-using SalesWeb.Models;
+using SalesWeb.Data.Context;
+using SalesWeb.Domain.Interfaces;
+using SalesWeb.Domain.Models.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Domain.Repositories
+namespace SalesWeb.Data.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {

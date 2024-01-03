@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesWeb.Data;
-using SalesWeb.Domain.Interfaces.Repositories;
+using SalesWeb.Data.Context;
+using SalesWeb.Domain.Interfaces;
+using SalesWeb.Domain.Models.Entities;
+using SalesWeb.Domain.Models.InputModel;
 using SalesWeb.Domain.Services.Exceptions;
-using SalesWeb.Models;
-using SalesWeb.Models.InputModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SalesWeb.Domain.Repositories
+namespace SalesWeb.Data.Repositories
 {
     public class SellerRepository : ISellerRepository
     {
